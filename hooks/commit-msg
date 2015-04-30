@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var commitMsgPath = process.argv[2];
+var commitMsg = fs.readFileSync(commitMsgPath).toString()
+
+var COMMIT_FORMAT = /[\d\w]+\([\w\d]*\):.+/i
+
+if (!COMMIT_FORMAT.test(commitMsg)) {
+  console.log("Commit message must match format: $task($issueId): $msg")
+  process.exit(1)
+}
